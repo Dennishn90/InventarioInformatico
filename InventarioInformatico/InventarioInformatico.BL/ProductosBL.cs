@@ -21,8 +21,10 @@ namespace InventarioInformatico.BL
 
         public List<Producto> ObtenerProductos()
         {
-            ListadeProductos = _contexto.Productos.ToList();                    
-            return ListadeProductos;
+            ListadeProductos = _contexto.Productos
+            .Include("Categoria")
+            .ToList();
+                return ListadeProductos;
             
         }
 
@@ -37,6 +39,7 @@ namespace InventarioInformatico.BL
             {
                 var productoExistente = _contexto.Productos.Find(producto.Id);
                 productoExistente.Marca = producto.Marca;
+                productoExistente.CategoriaId = producto.CategoriaId;
                 productoExistente.Caracteristicas = producto.Caracteristicas;
                 productoExistente.Cantidad = producto.Cantidad;
             }
@@ -46,7 +49,8 @@ namespace InventarioInformatico.BL
 
         public Producto ObtenerProducto(int id)
         {
-            var producto = _contexto.Productos.Find(id);
+            var producto = _contexto.Productos
+                .Include("Categoria").FirstOrDefault(p => p.Id == id);
             return producto;
         }
         public void EliminarProducto(int id)

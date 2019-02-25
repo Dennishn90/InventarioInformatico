@@ -10,10 +10,12 @@ namespace InventarioInformatico.WebAdmin.Controllers
     public class ProductosController : Controller
     {
         ProductosBL _productosBL;
+        CategoriasBL _categoriasBL;
 
         public ProductosController()
         {
             _productosBL = new ProductosBL();
+            _categoriasBL = new CategoriasBL();
         }
         // GET: Productos
         public ActionResult Index()
@@ -26,6 +28,10 @@ namespace InventarioInformatico.WebAdmin.Controllers
         public ActionResult Crear ()
         {
             var nuevoProducto = new Producto();
+            var categorias = _categoriasBL.ObtenerCategorias();
+
+            ViewBag.CategoriaId = new SelectList(categorias, "Id", "Descripcion");
+
 
             return View(nuevoProducto); 
         }
@@ -40,6 +46,11 @@ namespace InventarioInformatico.WebAdmin.Controllers
         public ActionResult Editar(int id)
         {
             var producto = _productosBL.ObtenerProducto(id);
+            List<Categoria> categorias = _categoriasBL.ObtenerCategorias();
+
+            ViewBag.CategoriaId =
+                new SelectList(categorias, "Id", "Descripcion", producto.CategoriaId);
+
 
             return View(producto);
         }
