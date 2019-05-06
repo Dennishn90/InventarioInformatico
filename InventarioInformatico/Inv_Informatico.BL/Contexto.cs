@@ -20,6 +20,7 @@ namespace Inv_Informatico.BL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            Database.SetInitializer(new DatosdeInicio());//Agregar datos de inicio a la BD al momento de crear.
         }
 
     
@@ -28,5 +29,6 @@ namespace Inv_Informatico.BL
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<Bodega> Bodegas { get; set; }
     public DbSet<Ubicacion> Ubicaciones { get; set; }
-    }
+    public DbSet<Usuario> Usuarios { get; set;}
+}
 }

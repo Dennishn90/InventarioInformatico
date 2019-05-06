@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Inv_Informatico.WebAdmin.Controllers
 {
+    [Authorize]
     public class HardwareController : Controller
     {
         HardwareBL _HardwareBL;

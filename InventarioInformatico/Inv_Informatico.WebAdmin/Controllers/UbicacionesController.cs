@@ -7,7 +7,8 @@ using System.Web.Mvc;
 
 namespace Inv_Informatico.WebAdmin.Controllers
 {
-     public class UbicacionesController : Controller
+    [Authorize]
+    public class UbicacionesController : Controller
     {
         UbicacionesBL _UbicacionesBL;
         BodegasBL _BodegasBL;

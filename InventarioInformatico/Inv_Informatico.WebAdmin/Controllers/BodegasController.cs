@@ -7,8 +7,10 @@ using System.Web.Mvc;
 
 namespace Inv_Informatico.WebAdmin.Controllers
 {
+    [Authorize]
     public class BodegasController : Controller
     {
+        
         BodegasBL _bodegasBL;
 
         public BodegasController()
